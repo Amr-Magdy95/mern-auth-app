@@ -13,6 +13,10 @@ app.get("/", (req, res) => {
   res.redirect("/api/user/");
 });
 app.use("/api/user", require("./routes/user.route"));
+app.use("/api/auth", require("./routes/auth.route"));
+
+// notFound and error handling
+app.use(require("./middleware/ErrorHandling"));
 
 // Server is now live
 const start = async () => {
