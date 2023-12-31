@@ -12,7 +12,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.redirect("/api/user/");
 });
-app.use("/api/user", require("./routes/userRoutes"));
+app.use("/api/user", require("./routes/user.route"));
 
 // Server is now live
 const start = async () => {
