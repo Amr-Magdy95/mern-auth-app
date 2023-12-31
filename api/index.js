@@ -8,6 +8,12 @@ const PORT = process.env.PORT || 3000;
 // middleware
 app.use(express.json());
 
+// routes
+app.get("/", (req, res) => {
+  res.redirect("/api/user/");
+});
+app.use("/api/user", require("./routes/userRoutes"));
+
 // Server is now live
 const start = async () => {
   try {
