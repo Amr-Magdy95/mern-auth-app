@@ -24,5 +24,7 @@ exports.signup = async (req, res) => {
     );
   // if no user, register and hash password
   const newUser = await User.create(data);
-  res.status(StatusCodes.CREATED).json(newUser);
+  res
+    .status(StatusCodes.CREATED)
+    .json({ message: `User ${newUser.username} created successfully...` });
 };
