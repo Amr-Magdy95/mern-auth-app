@@ -12,4 +12,13 @@ router.post(
   AuthController.signup
 );
 
+router.post(
+  "/signin",
+  [
+    body("email").isEmail().withMessage("Email is not valid"),
+    body("password").isLength({ min: 6 }).withMessage("Password is not valid"),
+  ],
+  AuthController.signin
+);
+
 module.exports = router;
