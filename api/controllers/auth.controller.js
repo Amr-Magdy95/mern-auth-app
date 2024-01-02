@@ -59,3 +59,30 @@ exports.signin = async (req, res) => {
     })
     .json(rest);
 };
+
+exports.google = async (req, res) => {
+  console.log(req.body);
+  let user = await User.findOne({ email: req.body.email }).exec();
+  if (!user) {
+    const generatedPw = Math.random().toString(36).slice(-8);
+
+    user = await User.create({
+      email: req.body.email,
+      password: generatedPw,
+      profilePicture: req.body.photo,
+      username:
+        req.body.name.split(" ").join("").toLowerCase() +
+        Math.random().toString(36).slice(-8),
+    });
+  }
+
+  ({ password: hashedPassword, ...rest } = user._doc);
+  const accessToken = user.accessToken();
+  res
+    .status(StatusCodes.OK)
+    .cookie("access_token", accessToken, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24,
+    })
+    .json(rest);
+};
