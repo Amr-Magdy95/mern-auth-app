@@ -21,4 +21,10 @@ router.post(
   AuthController.signin
 );
 
+router.post(
+  "/google",
+
+  AuthController.google
+);
+
 module.exports = router;
