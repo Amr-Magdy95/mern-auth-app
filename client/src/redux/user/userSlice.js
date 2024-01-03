@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
 
 const initialState = {
   currentUser: null,
@@ -26,4 +27,5 @@ const userState = createSlice({
 });
 
 export const { signInStart, signInSuccess, signInFailure } = userState.actions;
+export const selectUser = (store) => store.user;
 export default userState.reducer;
