@@ -5,5 +5,6 @@ const { verifyToken } = require("../middleware/verifyToken");
 
 router.get("/", UserController.test);
 router.post("/update/:id", [verifyToken], UserController.updateUser);
+router.delete("/delete/:id", [verifyToken], UserController.deleteUser);
 
 module.exports = router;

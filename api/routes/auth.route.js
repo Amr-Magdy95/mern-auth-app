@@ -26,5 +26,10 @@ router.post(
 
   AuthController.google
 );
+router.get(
+  "/signout",
+
+  AuthController.signout
+);
 
 module.exports = router;

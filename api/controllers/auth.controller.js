@@ -87,3 +87,10 @@ exports.google = async (req, res) => {
     })
     .json(rest);
 };
+
+exports.signout = async (req, res) => {
+  res
+    .clearCookie("access_token")
+    .status(200)
+    .json({ message: "sign out success" });
+};

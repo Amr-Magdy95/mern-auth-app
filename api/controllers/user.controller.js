@@ -35,3 +35,14 @@ exports.updateUser = async (req, res) => {
   const { password: tempPW, ...rest } = updatedUser._doc;
   res.status(StatusCodes.OK).json(rest);
 };
+
+exports.deleteUser = async (req, res) => {
+  if (req.params?.id !== req.user.id)
+    throw new CustomAPIError(
+      "Cannot delete a different user",
+      StatusCodes.UNAUTHORIZED
+    );
+
+  const user = await User.findByIdAndDelete(req.params.id);
+  res.status(StatusCodes.OK).json({ message: "user has been deleted..." });
+};

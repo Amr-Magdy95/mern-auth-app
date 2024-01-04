@@ -12,6 +12,10 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
+  signOut,
 } from "../../redux/user/userSlice";
 
 const Profile = () => {
@@ -80,6 +84,35 @@ const Profile = () => {
     );
   };
 
+  const handleDelete = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(
+        `http://localhost:3000/api/user/delete/${currentUser._id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
+      const data = await res.json();
+      if (!res.ok) throw new Error(data);
+      dispatch(deleteUserSuccess());
+    } catch (err) {
+      dispatch(deleteUserFailure(err));
+    }
+  };
+  const logout = async () => {
+    try {
+      await fetch("http://localhost:3000/api/auth/signout", {
+        method: "GET",
+        credentials: "include",
+      });
+      dispatch(signOut());
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="p-3 max-w-lg mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7 ">Profile</h1>
@@ -136,8 +169,12 @@ const Profile = () => {
         </button>
       </form>
       <div className="flex justify-between mt-5">
-        <span className="text-red-700 cursor-pointer">Delete Account</span>
-        <span className="text-red-700 cursor-pointer">Signout</span>
+        <span className="text-red-700 cursor-pointer" onClick={handleDelete}>
+          Delete Account
+        </span>
+        <span className="text-red-700 cursor-pointer" onClick={logout}>
+          Signout
+        </span>
       </div>
       <p className="text-red-700 mt-5"> {error && "Something Went Wrong"}</p>
     </div>
