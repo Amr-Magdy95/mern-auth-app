@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 // middleware
 app.use(require("cors")());
 app.use(express.json());
+app.use(require("cookie-parser")());
 
 // routes
 app.get("/", (req, res) => {
