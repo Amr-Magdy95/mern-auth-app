@@ -4,6 +4,7 @@ const { StatusCodes } = require("http-status-codes");
 
 exports.verifyToken = (req, res, next) => {
   const token = req?.cookies?.access_token;
+  console.log(req.cookies);
   if (!token)
     throw new CustomAPIError("Access Denied!", StatusCodes.UNAUTHORIZED);
 

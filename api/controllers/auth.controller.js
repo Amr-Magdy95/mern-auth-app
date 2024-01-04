@@ -78,6 +78,7 @@ exports.google = async (req, res) => {
 
   ({ password: hashedPassword, ...rest } = user._doc);
   const accessToken = user.accessToken();
+  console.log(accessToken);
   res
     .status(StatusCodes.OK)
     .cookie("access_token", accessToken, {

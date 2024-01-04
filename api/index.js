@@ -6,7 +6,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // middleware
-app.use(require("cors")());
+//app.use(require("cors")());
+app.use(require("cors")({ credentials: true, origin: true }));
 app.use(express.json());
 app.use(require("cookie-parser")());
 
